@@ -3,7 +3,7 @@ import {
   Editor, NodeView, NodeViewProps,
   NodeViewRenderer, NodeViewRendererProps, NodeViewRendererOptions, DecorationWithType,
 } from '@tiptap/core';
-import type { Decoration } from '@tiptap/pm/view';
+import type { Decoration, DecorationSource } from '@tiptap/pm/view';
 import type { Node as ProseMirrorNode } from '@tiptap/pm/model';
 
 import { AngularRenderer } from './AngularRenderer';
@@ -11,9 +11,10 @@ import { AngularNodeViewComponent } from './node-view.component';
 
 interface RendererUpdateProps {
   oldNode: ProseMirrorNode;
-  oldDecorations: Decoration[];
+  oldDecorations: readonly Decoration[];
+  innerDecorations: DecorationSource;
   newNode: ProseMirrorNode;
-  newDecorations: Decoration[];
+  newDecorations: readonly DecorationWithType[];
   updateProps: () => void;
 }
 
@@ -25,6 +26,7 @@ interface AngularNodeViewRendererOptions extends NodeViewRendererOptions {
 class AngularNodeView extends NodeView<Type<AngularNodeViewComponent>, Editor, AngularNodeViewRendererOptions> {
   renderer!: AngularRenderer<AngularNodeViewComponent, NodeViewProps>;
   contentDOMElement!: HTMLElement | null;
+  override decorations!: readonly DecorationWithType[];
 
   override mount() {
     const injector = this.options.injector as Injector;
@@ -38,6 +40,9 @@ class AngularNodeView extends NodeView<Type<AngularNodeViewComponent>, Editor, A
       getPos: () => this.getPos(),
       updateAttributes: (attributes = {}) => this.updateAttributes(attributes),
       deleteNode: () => this.deleteNode(),
+      view: this.view,
+      innerDecorations: this.innerDecorations,
+      HTMLAttributes: this.HTMLAttributes,
     };
 
     this.handleSelectionUpdate = this.handleSelectionUpdate.bind(this);
@@ -103,9 +108,13 @@ class AngularNodeView extends NodeView<Type<AngularNodeViewComponent>, Editor, A
     }
   }
 
-  update(node: ProseMirrorNode, decorations: DecorationWithType[]): boolean {
+  update(
+    node: ProseMirrorNode,
+    decorations: readonly Decoration[],
+    innerDecorations: DecorationSource,
+  ): boolean {
     const updateProps = () => {
-      this.renderer.updateProps({ node, decorations });
+      this.renderer.updateProps({ node, decorations: decorations as DecorationWithType[] });
     };
 
     if (this.options.update) {
@@ -113,13 +122,15 @@ class AngularNodeView extends NodeView<Type<AngularNodeViewComponent>, Editor, A
       const oldDecorations = this.decorations;
 
       this.node = node;
-      this.decorations = decorations;
+      this.decorations = decorations as DecorationWithType[];
+      this.innerDecorations = innerDecorations;
 
       return this.options.update({
         oldNode,
         oldDecorations,
+        innerDecorations,
         newNode: node,
-        newDecorations: decorations,
+        newDecorations: decorations as DecorationWithType[],
         updateProps: () => updateProps(),
       });
     }
@@ -133,7 +144,7 @@ class AngularNodeView extends NodeView<Type<AngularNodeViewComponent>, Editor, A
     }
 
     this.node = node;
-    this.decorations = decorations;
+    this.decorations = decorations as DecorationWithType[];
     updateProps();
 
     return true;
