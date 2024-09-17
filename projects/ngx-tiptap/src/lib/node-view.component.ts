@@ -3,6 +3,9 @@ import type { NodeViewProps } from '@tiptap/core';
 
 @Component({ template: '' })
 export class AngularNodeViewComponent implements NodeViewProps {
+  @Input() view!: NodeViewProps['view'];
+  @Input() innerDecorations!: NodeViewProps['innerDecorations'];
+  @Input() HTMLAttributes!: NodeViewProps['HTMLAttributes'];
   @Input() editor!: NodeViewProps['editor'];
   @Input() node!: NodeViewProps['node'];
   @Input() decorations!: NodeViewProps['decorations'];
