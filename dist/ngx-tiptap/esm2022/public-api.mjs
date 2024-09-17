@@ -1,0 +1,13 @@
+/*
+ * Public API Surface of ngx-tiptap
+ */
+export * from './lib/editor.directive';
+export * from './lib/floating-menu.directive';
+export * from './lib/bubble-menu.directive';
+export * from './lib/draggable.directive';
+export * from './lib/node-view-content.directive';
+export * from './lib/node-view.component';
+export * from './lib/ngx-tiptap.module';
+export * from './lib/AngularRenderer';
+export * from './lib/NodeViewRenderer';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uLy4uLy4uL3Byb2plY3RzL25neC10aXB0YXAvc3JjL3B1YmxpYy1hcGkudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7O0dBRUc7QUFFSCxjQUFjLHdCQUF3QixDQUFDO0FBQ3ZDLGNBQWMsK0JBQStCLENBQUM7QUFDOUMsY0FBYyw2QkFBNkIsQ0FBQztBQUM1QyxjQUFjLDJCQUEyQixDQUFDO0FBQzFDLGNBQWMsbUNBQW1DLENBQUM7QUFDbEQsY0FBYywyQkFBMkIsQ0FBQztBQUMxQyxjQUFjLHlCQUF5QixDQUFDO0FBRXhDLGNBQWMsdUJBQXVCLENBQUM7QUFDdEMsY0FBYyx3QkFBd0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qXG4gKiBQdWJsaWMgQVBJIFN1cmZhY2Ugb2Ygbmd4LXRpcHRhcFxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vbGliL2VkaXRvci5kaXJlY3RpdmUnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvZmxvYXRpbmctbWVudS5kaXJlY3RpdmUnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvYnViYmxlLW1lbnUuZGlyZWN0aXZlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL2RyYWdnYWJsZS5kaXJlY3RpdmUnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbm9kZS12aWV3LWNvbnRlbnQuZGlyZWN0aXZlJztcbmV4cG9ydCAqIGZyb20gJy4vbGliL25vZGUtdmlldy5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvbmd4LXRpcHRhcC5tb2R1bGUnO1xuXG5leHBvcnQgKiBmcm9tICcuL2xpYi9Bbmd1bGFyUmVuZGVyZXInO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvTm9kZVZpZXdSZW5kZXJlcic7XG4iXX0=
